@@ -22,7 +22,7 @@ body {
     display: flex;
 }
 .navbar ul li {
-    margin: 0 15px;
+    margin: 0 18px;
 }
 .navbar ul li a {
     color: white;
@@ -38,6 +38,13 @@ body {
 
 
 
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 .logo-image {
     max-width: 1024px; /* Ensure the maximum width does not exceed 1024px */
