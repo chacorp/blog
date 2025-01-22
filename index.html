@@ -18,12 +18,13 @@
                         targetSection.classList.add('sidebar-visible');
                     }
                 }
+
                 // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
                 if (id.startsWith('post')) { // Check if id starts with 'post'
-                    sidebar.classList.add('content');
+                    sidebar.classList.add('active');
                 } else {
-                    sidebar.classList.remove('content');
+                    sidebar.classList.remove('active');
                 }
             }
 
