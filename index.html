@@ -7,26 +7,31 @@
     <link rel="stylesheet" href="css/styles.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        function showContent(id) {
-            const sections = document.querySelectorAll('.content');
-            sections.forEach(section => section.classList.remove('active'));
-            
-            if (id === 'home' || id === 'main') {
-                document.getElementById('home-main').classList.add('active');
-            } else {
-                document.getElementById(id).classList.add('active');
-            }
-        }
+            function showContent(id) {
+                const sections = document.querySelectorAll('.content');
+                sections.forEach(section => section.classList.remove('active'));
 
-        const navLinks = document.querySelectorAll('.navbar a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                showContent(targetId);
+                if (id === 'home' || id === 'main') {
+                    document.getElementById('home-main').classList.add('active');
+                } else {
+                    document.getElementById(id).classList.add('active');
+                }
+            }
+
+            const navLinks = document.querySelectorAll('.navbar a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    showContent(targetId);
+                });
+            });
+
+            // Add click event for logo
+            document.querySelector('.logo').addEventListener('click', () => {
+                showContent('home');
             });
         });
-    });
     </script>
 </head>
 
@@ -41,6 +46,7 @@
             <li><a href="#post">Post</a></li>
             <li><a href="#cv">CV</a></li>
         </ul>
+    </div>
     <div id="home-main" class="content active">
         <h1>Welcome to My Personal Page</h1>
         <p>This section is shared between Home and About.</p>
