@@ -15,11 +15,15 @@
                     document.getElementById('home-main').classList.add('active');
                 } else {
                     document.getElementById(id).classList.add('active');
+                    // const targetSection = document.getElementById(id);
+                    // if (targetSection) {
+                    //     targetSection.classList.add('active');
+                    // }
                 }
 
-                // Handle sidebar visibility for Post section
+                // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
-                if (id === 'post') {
+                if (id.startsWith('post')) { // Check if id starts with 'post'
                     sidebar.classList.add('active');
                 } else {
                     sidebar.classList.remove('active');
@@ -65,8 +69,8 @@
     </div>
 
     <div class="sidebar">
-        <button data-target="box1">Box 1</button>
-        <button data-target="box2">Box 2</button>
+        <button data-target="post-box1">Box 1</button>
+        <button data-target="post-box2">Box 2</button>
     </div>
 
     <div id="home-main" class="content active">
@@ -88,11 +92,11 @@
         <p>This is the CV section.</p>
     </div>
 
-    <div id="box1" class="content">
+    <div id="post-box1" class="content">
         <h1>Box 1 Content</h1>
         <p>This is the content for Box 1.</p>
     </div>
-    <div id="box2" class="content">
+    <div id="post-box2" class="content">
         <h1>Box 2 Content</h1>
         <p>This is the content for Box 2.</p>
     </div>
