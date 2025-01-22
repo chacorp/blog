@@ -38,7 +38,7 @@ body {
 }
 .content.sidebar {
     display: block;
-    padding: 200px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
+    padding: 200px 220px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 
 
