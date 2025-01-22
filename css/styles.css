@@ -36,7 +36,10 @@ body {
     display: block;
     padding: 100px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
-
+.content.sidebar {
+    display: block;
+    padding: 200px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
+}
 
 
 .logo {
@@ -57,7 +60,7 @@ body {
     position: fixed;
     top: 100px;
     left: 0;
-    width: 200px;
+    width: 160px;
     background-color: #f0f0f0;
     height: calc(100% - 100px);
     padding: 20px;
@@ -72,7 +75,7 @@ body {
     margin: 10px 0;
     padding: 10px;
     border: none;
-    background-color: #333;
+    /* background-color: #333; */
     color: white;
     cursor: pointer;
     text-align: left;
