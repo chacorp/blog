@@ -9,18 +9,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             function showContent(id) {
                 const sections = document.querySelectorAll('.content');
-                sections.forEach(section => section.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
 
-                if (id === 'home' || id === 'main') {
-                    document.getElementById('home-main').classList.add('active');
-                } else {
-                    document.getElementById(id).classList.add('active');
-                    // const targetSection = document.getElementById(id);
-                    // if (targetSection) {
-                    //     targetSection.classList.add('active');
-                    // }
+                const targetSection = document.getElementById(id);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    if (id.startsWith('post')) {
+                        targetSection.classList.add('sidebar-visible');
+                    }
                 }
-
                 // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
                 if (id.startsWith('post')) { // Check if id starts with 'post'
