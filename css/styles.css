@@ -3,20 +3,20 @@ body {
     font-family: Arial, sans-serif;
 }
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    padding: 10px 20px;
-    color: white;
-}
-.navbar .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 20px 20px;
+    z-index: 1000;
 }
 .navbar ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
@@ -27,21 +27,38 @@ body {
 .navbar ul li a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
 }
-.navbar ul li a:hover {
-    color: #00bcd4;
-}
-
 .content {
     display: none;
-    padding: 20px;
+    padding: 70px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 .content.active {
     display: block;
 }
 
+
+
+
 .logo-image {
-    height: 40px;
+    width: 60%; /* Set the desired width */
+    height: auto; /* Maintain the aspect ratio */
     vertical-align: middle;
+}
+
+
+.interpolation-panel .custom-image {
+    width: 60%; /* Set the desired width */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+.interpolation-panel .custom-interpolation-image {
+    width: 80%;
+    border-radius: 5px;
+}
+
+iframe {
+    width: 80%;
+    aspect-ratio: 16 / 9;
+    border:none;
+    overflow:hidden;
 }
