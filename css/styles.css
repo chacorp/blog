@@ -42,8 +42,7 @@ body {
     color: white;
     text-decoration: none;
     font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
+    display: flex;
 }
 
 .logo-image {
