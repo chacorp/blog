@@ -30,10 +30,10 @@ body {
 }
 .content {
     display: none;
-    padding: 70px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 .content.active {
     display: block;
+    padding: 70px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 
 
