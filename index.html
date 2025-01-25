@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSH BLOG</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/yaml/2.1.1/yaml.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/yaml/2.1.1/yaml.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/yaml@2.1.1/dist/yaml.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             async function loadYAMLToBoxes() {
                 try {
-                    const response = await fetch('./data/text.yml');
+                    // Update relative path if needed
+                    const response = await fetch('data/text.yml');
                     if (!response.ok) {
                         throw new Error(`Failed to load YAML file: ${response.status}`);
                     }
-                    const yamlText = await response.text();
-                    const data = YAML.parse(yamlText);
-                    // 검증: YAML 파일 내용 확인
-                    console.log('Loaded data:', data);
 
-                    if (!Array.isArray(data) || data.length === 0) {
-                        console.error('YAML data is not an array or is empty:', data);
-                        return;
-                    }
+                    const yamlText = await response.text();
+                    console.log('YAML loaded:', yamlText);
+
+                    const data = YAML.parse(yamlText);
+                    console.log('Parsed YAML:', data);
 
                     const sidebar = document.querySelector('.sidebar');
                     sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
