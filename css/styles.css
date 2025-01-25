@@ -32,16 +32,21 @@ body {
 }
 
 .is-600{
-    max-width: 600px; /* Ensure the maximum width does not exceed 1024px */
+    max-width: 600px; /* Ensure the maximum width does not exceed 600px */
 }
 .is-800{
-    max-width: 800px; /* Ensure the maximum width does not exceed 1024px */
+    max-width: 800px; 
 }
 .is-1000{
-    max-width: 1000px; /* Ensure the maximum width does not exceed 1024px */
+    max-width: 1000px; 
 }
 .is-1200{
-    max-width: 1200px; /* Ensure the maximum width does not exceed 1024px */
+    max-width: 1200px; 
+}
+
+
+.postbox{
+    max-width: 600px; 
 }
 
 .content {
