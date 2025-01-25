@@ -8,21 +8,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/yaml/2.1.1/yaml.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // async function loadYAMLToBox1() {
-            //     try {
-            //         const response = await fetch('/data/text.yml');
-            //         const yamlText = await response.text();
-            //         const data = YAML.parse(yamlText);
+            async function loadYAMLToBoxes() {
+                try {
+                    const response = await fetch('/data/text.yml');
+                    const yamlText = await response.text();
+                    const data = YAML.parse(yamlText);
 
-            //         const box1Content = document.getElementById('post-box1');
-            //         box1Content.innerHTML = `
-            //             <h1>${data[0].title}</h1>
-            //             <p>${data[0].text}</p>
-            //         `;
-            //     } catch (error) {
-            //         console.error('Error loading YAML file:', error);
-            //     }
-            // }
+                    const container = document.querySelector('body');
+                    const sidebar = document.querySelector('.sidebar');
+
+                    data.forEach((item, index) => {
+                        // Create a new content box
+                        const box = document.createElement('div');
+                        box.id = `post-box${index + 1}`;
+                        box.className = 'content';
+                        box.innerHTML = `
+                            <h1>${item.title}</h1>
+                            <p>${item.text}</p>
+                        `;
+                        container.appendChild(box);
+
+                        // Add a button for the new box in the sidebar
+                        const button = document.createElement('button');
+                        button.textContent = `Box ${index + 1}`;
+                        button.setAttribute('data-target', `post-box${index + 1}`);
+                        sidebar.appendChild(button);
+
+                        // Add event listener for the button
+                        button.addEventListener('click', function() {
+                            showContent(`post-box${index + 1}`);
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error loading YAML file:', error);
+                }
+            }
 
             function showContent(id) {
                 const sections = document.querySelectorAll('.content');
@@ -58,14 +78,16 @@
                 showContent('home');
             });
 
-            // Sidebar buttons functionality
-            const sidebarButtons = document.querySelectorAll('.sidebar button');
-            sidebarButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    showContent(targetId);
-                });
-            });
+            // // Sidebar buttons functionality
+            // const sidebarButtons = document.querySelectorAll('.sidebar button');
+            // sidebarButtons.forEach(button => {
+            //     button.addEventListener('click', function() {
+            //         const targetId = this.getAttribute('data-target');
+            //         showContent(targetId);
+            //     });
+            // });
+            // Load YAML content into dynamic boxes
+            loadYAMLToBoxes();
         });
     </script>
 </head>
