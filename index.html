@@ -44,8 +44,6 @@
                     console.error('Error loading YAML file:', error);
                 }
             }
-            
-            loadYAMLToBoxes();
 
             function showContent(id) {
                 const sections = document.querySelectorAll('.content');
@@ -56,6 +54,7 @@
                     targetSection.classList.add('active');
                     if (id.startsWith('post')) {
                         targetSection.classList.add('sidebar-visible');
+                        loadYAMLToBoxes();
                     }
                 }
 
