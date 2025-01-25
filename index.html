@@ -5,8 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSH BLOG</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/yaml/2.1.1/yaml.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // async function loadYAMLToBox1() {
+            //     try {
+            //         const response = await fetch('/data/text.yml');
+            //         const yamlText = await response.text();
+            //         const data = YAML.parse(yamlText);
+
+            //         const box1Content = document.getElementById('post-box1');
+            //         box1Content.innerHTML = `
+            //             <h1>${data[0].title}</h1>
+            //             <p>${data[0].text}</p>
+            //         `;
+            //     } catch (error) {
+            //         console.error('Error loading YAML file:', error);
+            //     }
+            // }
+
             function showContent(id) {
                 const sections = document.querySelectorAll('.content');
                 sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
@@ -93,6 +110,16 @@
     <div id="post-box1" class="content">
         <h1>Box 1 Content</h1>
         <p>This is the content for Box 1.</p>
+        </br></br>
+        {% for text in site.data.site.data.text %}
+            <h2>{{ text.title }}</h2>
+            <p>{{ text.text }}</p>
+            <!-- {% if author.is_me %}
+                {{ author.first_name }} {{ author.middle_name }} {{ author.last_name }}{% if forloop.last == false %},{% endif %}
+            {% else %}
+                <a href="{{ author.website }}">{{ author.first_name }} {{ author.middle_name }} {{ author.last_name }}</a>{% if forloop.last == false %},{% endif %}
+            {% endif %} -->
+        {% endfor %}
     </div>
     <div id="post-box2" class="content">
         <h1>Box 2 Content</h1>
