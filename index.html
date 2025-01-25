@@ -10,12 +10,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             async function loadYAMLToBoxes() {
                 try {
-                    const response = await fetch('/data/text.yml');
+                    const response = await fetch('./data/text.yml');
+                    if (!response.ok) {
+                        throw new Error(`Failed to load YAML file: ${response.status}`);
+                    }
                     const yamlText = await response.text();
                     const data = YAML.parse(yamlText);
+                    // 검증: YAML 파일 내용 확인
+                    console.log('Loaded data:', data);
 
-                    const container = document.querySelector('body');
+                    if (!Array.isArray(data) || data.length === 0) {
+                        console.error('YAML data is not an array or is empty:', data);
+                        return;
+                    }
+
                     const sidebar = document.querySelector('.sidebar');
+                    sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
 
                     data.forEach((item, index) => {
                         // Create a new content box
@@ -23,10 +33,10 @@
                         box.id = `post-box${index + 1}`;
                         box.className = 'content';
                         box.innerHTML = `
-                            <h1>${item.title}</h1>
+                            <h2>${item.title}</h2>
                             <p>${item.text}</p>
                         `;
-                        container.appendChild(box);
+                        document.body.appendChild(box);
 
                         // Add a button for the new box in the sidebar
                         const button = document.createElement('button');
@@ -39,7 +49,6 @@
                             showContent(`post-box${index + 1}`);
                         });
                     });
-                    
                 } catch (error) {
                     console.error('Error loading YAML file:', error);
                 }
@@ -59,7 +68,7 @@
 
                 // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
-                if (id.startsWith('post')) { // Check if id starts with 'post'
+                if (id === 'post') {
                     sidebar.classList.add('active');
                     loadYAMLToBoxes();
                 } else {
