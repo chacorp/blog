@@ -30,6 +30,20 @@ body {
     text-decoration: none;
     font-size: 16px;
 }
+
+.is-600{
+    max-width: 600px; /* Ensure the maximum width does not exceed 1024px */
+}
+.is-800{
+    max-width: 800px; /* Ensure the maximum width does not exceed 1024px */
+}
+.is-1000{
+    max-width: 1000px; /* Ensure the maximum width does not exceed 1024px */
+}
+.is-1200{
+    max-width: 1200px; /* Ensure the maximum width does not exceed 1024px */
+}
+
 .content {
     display: none;
 }
@@ -38,9 +52,30 @@ body {
     padding: 100px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 .content.active.sidebar-visible {
-    padding: 100px 220px 20px; /* Add top padding to avoid being hidden behind navbar */
+    padding: 100px 280px 20px; /* top left right bottom */
 }
-
+.content p {
+    white-space: pre-wrap;
+}
+.one-column {
+    display: block;
+    /* align-items: left; */
+    /* flex-direction: row; */
+}
+.two-column {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.two-column .image-container {
+    flex: 1;
+    padding: 20px;
+}
+.two-column .text-container {
+    flex: 1;
+    padding: 20px;
+}
 
 .logo {
     color: white;
@@ -50,7 +85,7 @@ body {
 
 .logo-image {
     max-width: 1024px; /* Ensure the maximum width does not exceed 1024px */
-    width: 30%; /* Set the desired width */
+    width: 100%; /* Set the desired width */
     height: auto; /* Maintain the aspect ratio */
     vertical-align: middle;
 }
@@ -58,30 +93,32 @@ body {
 
 .sidebar {
     position: fixed;
-    top: 100px;
+    top: 90px;
     left: 0;
-    bottom: 100px;
-    width: 140px;
-    background-color: #e1e1e1;
-    height: calc(100% - 30px);
-    padding: 20px;
+    bottom: 40px;
+    width: 200px;
+    background-color: #eeeeee;
+    max-height: 90vh;
+    padding: 10px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     display: none;
     flex-direction: column;
+    overflow-y: auto; /* Add vertical scrollbar */
 }
 .sidebar.active {
     display: flex;
 }
 .sidebar button {
-    margin: 10px 0;
+    margin: 10px 10px;
     padding: 0;
     border: none;
     background: none;
     color: black;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     text-align: left;
 }
 .sidebar button:hover {
     color: #555;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }

@@ -5,75 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSH BLOG</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/yaml/2.1.1/yaml.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/yaml@2.1.1/dist/yaml.min.js"></script> -->
-    <script>
-        console.log('YAML library loaded:', typeof YAML !== 'undefined');
-    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            async function loadYAMLToBoxes() {
+            async function unloadJSONToBoxes() {
+                // // Remove all dynamically created content boxes
+                // const boxes = document.querySelectorAll('.content');
+                // boxes.forEach(box => {
+                //     if (!box.classList.contains('active')) {
+                //         box.remove();
+                //     }
+                // });
+
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
+            }
+            
+            async function loadJSONToBoxes(filePath) {
                 try {
-                    // Update relative path if needed
-                    const response = await fetch('data/text.yml');
+                    const response = await fetch(filePath);
                     if (!response.ok) {
-                        throw new Error(`Failed to load YAML file: ${response.status}`);
+                        throw new Error(`Failed to load JSON file: ${response.status}`);
                     }
-
-                    const yamlText = await response.text();
-                    console.log('YAML loaded:', yamlText);
-
-                    const data = YAML.parse(yamlText);
-                    console.log('Parsed YAML:', data);
-
+                    const data = await response.json();
+                    // console.log('Parsed JSON data:', data);
+                    
                     const sidebar = document.querySelector('.sidebar');
                     sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
 
-                    data.forEach((item, index) => {
+                    for (const [index, item] of data.entries()) {
                         // Create a new content box
                         const box = document.createElement('div');
                         box.id = `post-box${index + 1}`;
-                        box.className = 'content';
+                        box.className = 'content is-600';
+
+                        // Load content from text file if specified
+                        let textContent = '';
+                        if (item.text.endsWith('.txt')) {
+                            const textResponse = await fetch(item.text);
+                            if (textResponse.ok) {
+                                textContent = await textResponse.text();
+                            } else {
+                                console.error(`Failed to load text file: ${item.text}`);
+                                textContent = 'Error loading content.';
+                            }
+                        } else {
+                            textContent = item.text;
+                        }
+
                         box.innerHTML = `
                             <h2>${item.title}</h2>
-                            <p>${item.text}</p>
+                            <p>${textContent}</p>
                         `;
                         document.body.appendChild(box);
 
                         // Add a button for the new box in the sidebar
                         const button = document.createElement('button');
-                        button.textContent = `Box ${index + 1}`;
+                        // button.textContent = `Box ${index + 1}`;
+                        button.textContent = item.title;
                         button.setAttribute('data-target', `post-box${index + 1}`);
                         sidebar.appendChild(button);
 
                         // Add event listener for the button
                         button.addEventListener('click', function() {
-                            showContent(`post-box${index + 1}`);
+                            showContent(`post-box${index + 1}`, true);
                         });
-                    });
+                    }
+
+                    // Trigger MathJax to render equations
+                    MathJax.typeset();
                 } catch (error) {
-                    console.error('Error loading YAML file:', error);
+                    console.error('Error loading JSON file:', error);
                 }
             }
 
-            function showContent(id) {
+            function showContent(id, keepSidebar = false) {
                 const sections = document.querySelectorAll('.content');
                 sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
 
                 const targetSection = document.getElementById(id);
                 if (targetSection) {
                     targetSection.classList.add('active');
+
                     if (id.startsWith('post')) {
+                        targetSection.classList.add('sidebar-visible');
+                    }
+                    else if (id.startsWith('work')) {
                         targetSection.classList.add('sidebar-visible');
                     }
                 }
 
                 // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
-                if (id === 'post') {
+                
+                if (id === 'post' || keepSidebar) {
                     sidebar.classList.add('active');
-                    loadYAMLToBoxes();
+                    if (id === 'post') {
+                        unloadJSONToBoxes()
+                        loadJSONToBoxes('data/text.json');
+                    }
+                } else if (id === 'work' || keepSidebar) {
+                    sidebar.classList.add('active');
+                    if (id === 'work') {
+                        unloadJSONToBoxes()
+                        loadJSONToBoxes('data/work.json');
+                    }
                 } else {
+                    unloadJSONToBoxes()
                     sidebar.classList.remove('active');
                 }
             }
@@ -102,6 +141,7 @@
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
             <li><a href="#post">Post</a></li>
             <li><a href="#cv">CV</a></li>
         </ul>
@@ -110,21 +150,49 @@
     <div class="sidebar">
     </div>
 
-    <div id="home" class="content active">
-        <h1>Welcome to My Personal Page</h1>
-        <img src="image/test.png" alt="Logo" class="logo-image">
-        <p>This section is shared between Home and About.</p>
-        <p>Still working in progress</p>
+    <div id="home" class="content is-1200 active">
+        <div class="two-column">
+            <div class="image-container">
+                <img src="image/test.png" alt="Logo" class="logo-image">
+            </div>
+            <div class="text-container">
+                <h1>Welcome to My Blog</h1>
+                <h2>Hello there!</h2>
+                <p>Still working in progress</p>
+            </div>
+        </div>
     </div>
-    <div id="about" class="content">
-        <h1>About</h1>
-        <p>This blog is about nothing and everything.</p>
+
+    <div id="about" class="content is-800">
+        <div class="two-column">
+            <div class="image-container">
+                <img src="image/batman-thinking.gif" alt="Logo" class="logo-image">
+            </div>
+            <div class="text-container">
+                <h1>About</h1>
+                <p>This blog is about my personal scribbles.</p>
+                <p>It is about nothing and everything.</p>
+            </div>
+        </div>
+        
+        <div class="one-column">
+            <h1>Who am I?</h1>
+            <p></p>
+            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
+            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
+            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
+        </div>
     </div>
-    <div id="post" class="content">
+    <div id="post" class="content is-800">
         <h1>My Posts</h1>
         <p>This is the post section.</p>
+        <p>I post 뻘글 here.</p>
     </div>
-    <div id="cv" class="content">
+    <div id="work" class="content is-800">
+        <h1>Works</h1>
+        <p>My works.</p>
+    </div>
+    <div id="cv" class="content is-800">
         <h1>My CV</h1>
         <p>This is the CV section.</p>
     </div>
