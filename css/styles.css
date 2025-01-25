@@ -57,7 +57,7 @@ body {
     padding: 100px 20px 20px; /* Add top padding to avoid being hidden behind navbar */
 }
 .content.active.sidebar-visible {
-    padding: 100px 280px 20px; /* top left bottom right */
+    padding: 100px 20px 20px; /* top left bottom right */
 }
 .content p {
     white-space: pre-wrap;
@@ -99,13 +99,13 @@ body {
 .sidebar {
     position: fixed;
     top: 90px;
-    left: 0;
+    right: 0;
     bottom: 40px;
     width: 200px;
     background-color: #eeeeee;
     max-height: 90vh;
     padding: 5px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
     display: none;
     flex-direction: column;
     overflow-y: auto; /* Add vertical scrollbar */

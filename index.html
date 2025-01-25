@@ -50,6 +50,7 @@
                                 console.error(`Failed to load text file: ${item.text}`);
                                 textContent = 'Error loading content.';
                             }
+                            textContent = `<p>${textContent}</p>`;
                         } else if (item.text.endsWith('.jpg') || item.text.endsWith('.png')) {
                             textContent = `<img src="${item.text}" alt="Image Content" class="logo-image">`;
                         } else {
@@ -64,7 +65,6 @@
 
                         // Add a button for the new box in the sidebar
                         const button = document.createElement('button');
-                        // button.textContent = `Box ${index + 1}`;
                         button.textContent = item.title;
                         button.setAttribute('data-target', `post-box${index + 1}`);
                         sidebar.appendChild(button);
