@@ -50,13 +50,15 @@
                                 console.error(`Failed to load text file: ${item.text}`);
                                 textContent = 'Error loading content.';
                             }
+                        } else if (item.text.endsWith('.jpg') || item.text.endsWith('.png')) {
+                            textContent = `<img src="${item.text}" alt="Image Content" class="logo-image">`;
                         } else {
-                            textContent = item.text;
+                            textContent = `<p>${item.text}</p>`;
                         }
 
                         box.innerHTML = `
                             <h2>${item.title}</h2>
-                            <p>${textContent}</p>
+                            ${textContent}
                         `;
                         document.body.appendChild(box);
 
@@ -178,23 +180,24 @@
         <div class="one-column">
             <h1>Who am I?</h1>
             <p></p>
-            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
-            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
-            My name is Sihun Cha, My name is Sihun Cha, My name is Sihun Cha, 
+            I wonder who I am...
         </div>
     </div>
+
     <div id="post" class="content is-800">
         <h1>My Posts</h1>
         <p>This is the post section.</p>
         <p>I post 뻘글 here.</p>
     </div>
+
     <div id="work" class="content is-800">
         <h1>Works</h1>
         <p>My works.</p>
     </div>
+
     <div id="cv" class="content is-800">
         <h1>My CV</h1>
-        <p>This is the CV section.</p>
+        <iframe src="https://chacorp.github.io/sihuncha/cv.html" title="CV Page"></iframe>
     </div>
 
 </body>
