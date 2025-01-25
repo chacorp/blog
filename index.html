@@ -54,7 +54,6 @@
                     targetSection.classList.add('active');
                     if (id.startsWith('post')) {
                         targetSection.classList.add('sidebar-visible');
-                        loadYAMLToBoxes();
                     }
                 }
 
@@ -62,6 +61,7 @@
                 const sidebar = document.querySelector('.sidebar');
                 if (id.startsWith('post')) { // Check if id starts with 'post'
                     sidebar.classList.add('active');
+                    loadYAMLToBoxes();
                 } else {
                     sidebar.classList.remove('active');
                 }
@@ -79,17 +79,6 @@
             document.querySelector('.logo').addEventListener('click', () => {
                 showContent('home');
             });
-
-            // // Sidebar buttons functionality
-            // const sidebarButtons = document.querySelectorAll('.sidebar button');
-            // sidebarButtons.forEach(button => {
-            //     button.addEventListener('click', function() {
-            //         const targetId = this.getAttribute('data-target');
-            //         showContent(targetId);
-            //     });
-            // });
-            // Load YAML content into dynamic boxes
-            
         });
     </script>
 </head>
@@ -108,8 +97,6 @@
     </div>
 
     <div class="sidebar">
-        <!-- <button data-target="post-box1">Box 1</button>
-        <button data-target="post-box2">Box 2</button> -->
     </div>
 
     <div id="home" class="content active">
@@ -131,18 +118,5 @@
         <p>This is the CV section.</p>
     </div>
 
-    <!-- <div id="post-box1" class="content">
-        <h1>Box 1 Content</h1>
-        <p>This is the content for Box 1.</p>
-        </br></br>
-        {% for text in site.data.site.data.text %}
-            <h2>{{ text.title }}</h2>
-            <p>{{ text.text }}</p>
-        {% endfor %}
-    </div>
-    <div id="post-box2" class="content">
-        <h1>Box 2 Content</h1>
-        <p>This is the content for Box 2.</p>
-    </div> -->
 </body>
 </html>
