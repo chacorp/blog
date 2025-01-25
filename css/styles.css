@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: 'Google Sans', sans-serif;
+    background-color: #d3d3d3;
 }
 .navbar {
     position: fixed;
@@ -60,8 +61,8 @@ body {
     top: 100px;
     left: 0;
     bottom: 100px;
-    width: 160px;
-    background-color: #f0f0f0;
+    width: 140px;
+    background-color: #e1e1e1;
     height: calc(100% - 30px);
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
