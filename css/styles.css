@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
+
 body {
     margin: 0;
     font-family: 'Google Sans', sans-serif;
@@ -47,6 +49,8 @@ body {
 
 .postbox{
     max-width: 600px; 
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif; 
 }
 
 .content {
