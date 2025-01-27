@@ -1,3 +1,16 @@
 <a href="https://dl.acm.org/doi/abs/10.1145/3532719.3543204">
 <img src="image/SIGGRAPH 2022 poster.jpg" class="postbox-image">
 </a>
+
+-------------
+
+SIGGRAPH '22: ACM SIGGRAPH 2022 Posters
+
+학술대회
+
+- Editors: Munkhtsetseg Nandigjav, Olga Diamante
+- Publisher: Association for Computing Machinery, New York, NY, United States
+- Conference: SIGGRAPH '22: Special Interest Group on Computer Graphics and Interactive Techniques Conference Vancouver BC Canada August 7 - 11, 2022
+- ISBN: 978-1-4503-9361-4
+- Published: 25 July 2022
+- Sponsors: SIGGRAPH

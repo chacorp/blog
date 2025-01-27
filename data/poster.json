@@ -14,5 +14,29 @@
     {
         "title":"(2020) Mass",
         "text":"poster/2020-mass.txt"
+    },
+    {
+        "title":"(2020) WESS <전시후도록 Exhibition \\ Publication>",
+        "text":"poster/2020-wess.txt"
+    },
+    {
+        "title":"(2020) 모델하우스",
+        "text":"poster/2020-modelhouse-HM05.txt"
+    },
+    {
+        "title":"(2019) SHOWCASE:2019",
+        "text":"poster/2019-showcase.txt"
+    },
+    {
+        "title":"(2019) 창작지원:Playful Media",
+        "text":"poster/2019-playfulmedia.txt"
+    },
+    {
+        "title":"(2019) 드로잉을 위한 드로잉",
+        "text":"poster/2019-drawingfordrawing.txt"
+    },
+    {
+        "title":"(2019) 물은 피를 씻는다",
+        "text":"poster/2019-waterwashesblood.txt"
     }
 ]
