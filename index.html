@@ -22,7 +22,7 @@
                 sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
             }
             
-            async function loadJSONToBoxes(filePath) {
+            async function loadJSONToBoxes(filePath, parent_id='') {
                 try {
                     const response = await fetch(filePath);
                     if (!response.ok) {
@@ -37,7 +37,7 @@
                     for (const [index, item] of data.entries()) {
                         // Create a new content box
                         const box = document.createElement('div');
-                        box.id = `post-box${index + 1}`;
+                        box.id = `${parent_id}-post-box${index + 1}`;
                         box.className = 'content postbox';
 
                         // Load content from text file if specified
@@ -52,7 +52,7 @@
                             }
                             textContent = `<p>${textContent}</p>`;
                         } else if (item.text.endsWith('.jpg') || item.text.endsWith('.png')) {
-                            textContent = `<img src="${item.text}" alt="Image Content" class="logo-image">`;
+                            textContent = `<img src="${item.text}" class="postbox-image">`;
                         } else {
                             textContent = `<p>${item.text}</p>`;
                         }
@@ -66,12 +66,12 @@
                         // Add a button for the new box in the sidebar
                         const button = document.createElement('button');
                         button.textContent = item.title;
-                        button.setAttribute('data-target', `post-box${index + 1}`);
+                        button.setAttribute('data-target', box.id);
                         sidebar.appendChild(button);
 
                         // Add event listener for the button
                         button.addEventListener('click', function() {
-                            showContent(`post-box${index + 1}`, true);
+                            showContent(box.id);
                         });
                     }
 
@@ -85,15 +85,22 @@
             function showContent(id, keepSidebar = false) {
                 const sections = document.querySelectorAll('.content');
                 sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
+                // sections.forEach(section => {
+                //     if (!section.classList.contains('sidebar-visible')|| !section.id.includes(id))
+                //         section.classList.remove('active')
+                // });
 
                 const targetSection = document.getElementById(id);
                 if (targetSection) {
                     targetSection.classList.add('active');
 
-                    if (id.startsWith('post')) {
+                    if (id.startsWith('memo')) {
                         targetSection.classList.add('sidebar-visible');
                     }
                     else if (id.startsWith('work')) {
+                        targetSection.classList.add('sidebar-visible');
+                    }
+                    else if (id.startsWith('poster')) {
                         targetSection.classList.add('sidebar-visible');
                     }
                 }
@@ -101,20 +108,18 @@
                 // Handle sidebar visibility for Post-related sections
                 const sidebar = document.querySelector('.sidebar');
                 
-                if (id === 'post' || keepSidebar) {
+                unloadJSONToBoxes()
+                if (id.includes('memo')) {
                     sidebar.classList.add('active');
-                    if (id === 'post') {
-                        unloadJSONToBoxes()
-                        loadJSONToBoxes('data/text.json');
-                    }
-                } else if (id === 'work' || keepSidebar) {
+                    loadJSONToBoxes('data/text.json', id);
+                } else if (id.includes('poster')) {
                     sidebar.classList.add('active');
-                    if (id === 'work') {
-                        unloadJSONToBoxes()
-                        loadJSONToBoxes('data/work.json');
-                    }
-                } else {
-                    unloadJSONToBoxes()
+                    loadJSONToBoxes('data/poster.json', id);
+                } else if (id.includes('work')) {
+                    sidebar.classList.add('active');
+                    loadJSONToBoxes('data/work.json', id);
+                } 
+                else {
                     sidebar.classList.remove('active');
                 }
             }
@@ -144,7 +149,8 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#work">Work</a></li>
-            <li><a href="#post">Post</a></li>
+            <li><a href="#poster">Poster</a></li>
+            <li><a href="#memo">Memo</a></li>
             <li><a href="#cv">CV</a></li>
         </ul>
     </div>
@@ -184,14 +190,19 @@
         </div>
     </div>
 
-    <div id="post" class="content is-800">
-        <h1>My Posts</h1>
-        <p>This is the post section.</p>
+    <div id="memo" class="content is-800">
+        <h1>Memo</h1>
+        <p>This is the memo section.</p>
         <p>I post 뻘글 here.</p>
+    </div>
+    
+    <div id="poster" class="content is-800">
+        <h1>Poster</h1>
+        <p>This is the Poster section.</p>
     </div>
 
     <div id="work" class="content is-800">
-        <h1>Works</h1>
+        <h1>Work</h1>
         <p>My works.</p>
     </div>
 
