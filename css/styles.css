@@ -10,17 +10,20 @@ body {
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 500px;
     background-color: #333;
     color: white;
-    padding: 20px 30px;
+    padding: 25px 20px 25px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
 }
 .navbar ul {
+    position: absolute;
     list-style: none;
-    margin: 0;
+    right: 0;
+    margin: 10px;
     padding: 0 60px; /* Add padding to prevent text from being cut off */
     display: flex;
 }
@@ -33,6 +36,44 @@ body {
     font-size: 16px;
 }
 
+.sidebar {
+    position: absolute;
+    font-family: 'Noto Sans KR', sans-serif; 
+    /* top: 60px; */
+    /* top: calc(100% + 5px); /* Ensures it always stays below  */
+    /* right below the navbar */
+    top: 50px;
+    /* right: 0; */
+    left: 0;
+    /* bottom: 40px; */
+    width: 100%;
+    background-color: #eeeeee;
+    /* max-height: 90vh; */
+    /* margin: 0px 0px 0px 100px; */
+    padding: 5px 10px;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: row;
+    overflow-x: auto; /* Add vertical scrollbar */
+}
+.sidebar.active {
+    display: flex;
+}
+.sidebar button {
+    font-size: 12px;
+    /* margin: 0px 0px 0px 15px; */
+    padding: 5px 20px;
+    border: none;
+    background: none;
+    color: black;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+}
+.sidebar button:hover {
+    color: #969696;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
 .plane-a{
     color: rgb(0, 94, 255);
     text-decoration: none;
@@ -67,7 +108,7 @@ body {
 
 .content {
     display: none;
-    padding: 100px 20px 20px; 
+    padding: 120px 20px 20px; 
 }
 .content.active {
     display: block;
@@ -100,6 +141,7 @@ body {
 }
 
 .logo {
+    position: fixed;
     color: white;
     text-decoration: none;
     font-size: 16px;
@@ -112,38 +154,6 @@ body {
     vertical-align: middle;
 }
 
-.sidebar {
-    position: fixed;
-    font-family: 'Noto Sans KR', sans-serif; 
-    top: 90px;
-    right: 0;
-    bottom: 40px;
-    width: 180px;
-    background-color: #eeeeee;
-    max-height: 90vh;
-    padding: 5px;
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
-    display: none;
-    flex-direction: column;
-    overflow-y: auto; /* Add vertical scrollbar */
-}
-.sidebar.active {
-    display: flex;
-}
-.sidebar button {
-    font-size: 12px;
-    /* margin: 0px 5px 0px 10px; */
-    padding: 5px 5px;
-    border: none;
-    background: none;
-    color: black;
-    cursor: pointer;
-    text-align: left;
-}
-.sidebar button:hover {
-    color: #969696;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
 
 iframe {
     width: 100%;
@@ -157,4 +167,14 @@ video {
     width: 90%;
     height: auto;
     object-fit: cover;
+}
+canvas{
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: auto;
+    position: relative;
+    object-fit: cover;
+    /* vertical-align: middle; */
 }

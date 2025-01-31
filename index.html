@@ -7,8 +7,17 @@
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" id="MathJax-script" async
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script/threejs.js"></script> 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            function adjustSidebarPosition() {
+                const navbar = document.querySelector('.navbar');
+                const sidebar = document.querySelector('.sidebar');
+                const navbarHeight = navbar.offsetHeight;
+                sidebar.style.top = `${navbarHeight}px`;
+            }
+
             async function unloadJSONToBoxes() {
                 // Remove all dynamically created content boxes
                 const boxes = document.querySelectorAll('.postbox');
@@ -77,6 +86,7 @@
 
                     // Trigger MathJax to render equations
                     MathJax.typeset();
+                    // adjustSidebarPosition();
                 } catch (error) {
                     console.error('Error loading JSON file:', error);
                 }
@@ -89,10 +99,36 @@
                 //     if (!section.classList.contains('sidebar-visible')|| !section.id.includes(id))
                 //         section.classList.remove('active')
                 // });
-
+                // const canvases = document.querySelectorAll('.canvas');
+                // canvases.remove();
+                
                 const targetSection = document.getElementById(id);
+                
+                // const canvasList = document.getElementById('.canvas');
+                // const canvasList = document.querySelector('[id$="canvas"]');
+                // const box = document.createElement('div');
+                // box.id = `${id}-debug`;
+                // box.className = `content active`;
+                // box.innerHTML = `<h2>debug</h2> ${id} ${targetSection.classList} ${canvasList.id} ${canvasList.classList}`;
+                // document.body.appendChild(box);
+                // // canvasList.forEach(canvasList => canvasList.classList.remove('active'));
+                // canvasList.forEach(canvas => {
+                //     if (!canvas.classList.contains('active')) {
+                //         canvas.remove();
+                //     }
+                // });
+                // if (canvasList)
+                //     canvasList.remove();
+
                 if (targetSection) {
                     targetSection.classList.add('active');
+                    
+                    // if (id.contains('.canvas')) {
+                    //     // const canvas = document.createElement('canvas');
+                    //     // canvas.id='about-canvas'
+                    //     // rendering(canvas);
+                    // } else{
+                    // }
 
                     if (id.startsWith('memo')) {
                         targetSection.classList.add('sidebar-visible');
@@ -102,6 +138,16 @@
                     }
                     else if (id.startsWith('poster')) {
                         targetSection.classList.add('sidebar-visible');
+                    }
+                }
+                if (id === 'home') {
+                    if (!document.getElementById('home-canvas')) {
+                        rendering();
+                    }
+                } else {
+                    const canvas = document.getElementById('home-canvas');
+                    if (canvas) {
+                        canvas.remove();
                     }
                 }
 
@@ -153,9 +199,9 @@
             <li><a href="#memo">Memo</a></li>
             <li><a href="#cv">CV</a></li>
         </ul>
-    </div>
-
-    <div class="sidebar">
+    
+        <div class="sidebar">
+        </div>
     </div>
 
     <div id="home" class="content is-1200 active">
@@ -168,6 +214,11 @@
                 <h2>Hello there!</h2>
                 <p>Still working in progress</p>
             </div>
+        </div>
+        <div class="one-column">
+            <h3>Rendering threejs: just for fun</h3>
+            <p>cube cube cube cube</p>
+            <script>rendering()</script>
         </div>
     </div>
 
@@ -212,4 +263,5 @@
     </div>
 
 </body>
+
 </html>

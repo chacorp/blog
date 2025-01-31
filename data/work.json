@@ -20,12 +20,12 @@
         "text": "work/2021.11-transport_module.txt"
     },
     {
-        "title": "(2020) 즉석 화분 호출기 몬스테라",
-        "text": "work/2020.8-instant_recall_nursery_pot.txt"
-    },
-    {
         "title": "(2020) 자연 폐기 조각 기구",
         "text": "work/2020.7-natural_disposal_sculpting_device.txt"
+    },
+    {
+        "title": "(2020) 즉석 화분 호출기 몬스테라",
+        "text": "work/2020.8-instant_recall_nursery_pot.txt"
     },
     {
         "title": "(2020) 즉석 호출기 제프쿤스 강아지",
@@ -34,6 +34,14 @@
     {
         "title": "(2020) 즉석 화분 호출기 묘목",
         "text": "work/2020.6-instant_recall_sprout.txt"
+    },
+    {
+        "title": "(2020) 즉석 화분 호출기 알로에",
+        "text": "work/2020.3-instant_recall_aloe.txt"
+    },
+    {
+        "title": "(2020) 즉석 화분 호출기 야자",
+        "text": "work/2020.2-instant_recall_palmtree.txt"
     },
     {
         "title": "(2020) HM05 (a.k.a 플래시) 상상도",
