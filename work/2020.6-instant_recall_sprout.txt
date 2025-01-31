@@ -1,4 +1,4 @@
-즉석 호출기 묘목 | Instant recall sprout
+즉석 화분 호출기 묘목 | Instant recall nursery pot sprout
 
 <video poster="" id="01" autoplay controls muted loop playsinline>
     <source src="https://ve.media.tumblr.com/tumblr_q8x8qtGCEN1yoaejr_720.mp4" type="video/mp4">

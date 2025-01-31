@@ -1,18 +1,22 @@
 [
     {
+        "title": "(2024) 릴스케치",
+        "text": "work/2024.00-reelskatch.txt"
+    },
+    {
         "title": "(2023) 즉석 화분 구상도",
         "text": "work/2023.00-blueprint.txt"
     },
     {
-        "title": "(2022) 입자 출력 장치",
+        "title": "(2022) 입자 렌더 모듈",
         "text": "work/2022.12-particle_render_module.txt"
     },
     {
         "title": "(2021) 헌정 드로잉",
-        "text": "work/2021.11-dedicated_drawing.txt"
+        "text": "work/2021.11-tribute_drawing.txt"
     },
     {
-        "title": "(2021) 전송 장치",
+        "title": "(2021) 전송 모듈",
         "text": "work/2021.11-transport_module.txt"
     },
     {

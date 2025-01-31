@@ -1,4 +1,4 @@
-전송 장치 | Transport module
+전송 모듈 | Transport module
 
 <img src="https://64.media.tumblr.com/af0484e4e8f1098e8e6e42fb06571acf/14da33aa73e6a5cb-26/s500x750/feddb921ca1ec1c667848322f32ed98d0ea1fe9e.jpg" class="postbox-image">
 
