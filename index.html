@@ -95,51 +95,13 @@
             function showContent(id, keepSidebar = false) {
                 const sections = document.querySelectorAll('.content');
                 sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
-                // sections.forEach(section => {
-                //     if (!section.classList.contains('sidebar-visible')|| !section.id.includes(id))
-                //         section.classList.remove('active')
-                // });
-                // const canvases = document.querySelectorAll('.canvas');
-                // canvases.remove();
                 
                 const targetSection = document.getElementById(id);
-                
-                // const canvasList = document.getElementById('.canvas');
-                // const canvasList = document.querySelector('[id$="canvas"]');
-                // const box = document.createElement('div');
-                // box.id = `${id}-debug`;
-                // box.className = `content active`;
-                // box.innerHTML = `<h2>debug</h2> ${id} ${targetSection.classList} ${canvasList.id} ${canvasList.classList}`;
-                // document.body.appendChild(box);
-                // // canvasList.forEach(canvasList => canvasList.classList.remove('active'));
-                // canvasList.forEach(canvas => {
-                //     if (!canvas.classList.contains('active')) {
-                //         canvas.remove();
-                //     }
-                // });
-                // if (canvasList)
-                //     canvasList.remove();
 
                 if (targetSection) {
                     targetSection.classList.add('active');
-                    
-                    // if (id.contains('.canvas')) {
-                    //     // const canvas = document.createElement('canvas');
-                    //     // canvas.id='about-canvas'
-                    //     // rendering(canvas);
-                    // } else{
-                    // }
-
-                    if (id.startsWith('memo')) {
-                        targetSection.classList.add('sidebar-visible');
-                    }
-                    else if (id.startsWith('work')) {
-                        targetSection.classList.add('sidebar-visible');
-                    }
-                    else if (id.startsWith('poster')) {
-                        targetSection.classList.add('sidebar-visible');
-                    }
                 }
+                // threejs canvas
                 if (id === 'home') {
                     if (!document.getElementById('home-canvas')) {
                         rendering();
@@ -155,16 +117,10 @@
                 const sidebar = document.querySelector('.sidebar');
                 
                 unloadJSONToBoxes()
-                if (id.includes('memo')) {
+                if ((id.includes('memo')) || (id.includes('poster')) || (id.includes('work'))) {
                     sidebar.classList.add('active');
-                    loadJSONToBoxes('data/text.json', id);
-                } else if (id.includes('poster')) {
-                    sidebar.classList.add('active');
-                    loadJSONToBoxes('data/poster.json', id);
-                } else if (id.includes('work')) {
-                    sidebar.classList.add('active');
-                    loadJSONToBoxes('data/work.json', id);
-                } 
+                    loadJSONToBoxes(`data/${id}.json`, id);
+                }
                 else {
                     sidebar.classList.remove('active');
                 }
@@ -200,8 +156,9 @@
             <li><a href="#cv">CV</a></li>
         </ul>
     
-        <div class="sidebar">
-        </div>
+        <!-- <div class="sidebar-container active">
+        </div> -->
+        <div class="sidebar"></div>
     </div>
 
     <div id="home" class="content is-1200 active">

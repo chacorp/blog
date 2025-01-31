@@ -39,22 +39,16 @@ body {
 .sidebar {
     position: absolute;
     font-family: 'Noto Sans KR', sans-serif; 
-    /* top: 60px; */
-    /* top: calc(100% + 5px); /* Ensures it always stays below  */
-    /* right below the navbar */
     top: 50px;
-    /* right: 0; */
     left: 0;
-    /* bottom: 40px; */
+    right: 0;
     width: 100%;
     background-color: #eeeeee;
-    /* max-height: 90vh; */
-    /* margin: 0px 0px 0px 100px; */
-    padding: 5px 10px;
+    padding: 5px 100px 5px 10px;
     box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
     display: none;
     flex-direction: row;
-    overflow-x: auto; /* Add vertical scrollbar */
+    overflow-x: scroll;
 }
 .sidebar.active {
     display: flex;
@@ -62,7 +56,7 @@ body {
 .sidebar button {
     font-size: 12px;
     /* margin: 0px 0px 0px 15px; */
-    padding: 5px 20px;
+    padding: 5px 20px 5px 20px;
     border: none;
     background: none;
     color: black;
@@ -176,5 +170,10 @@ canvas{
     margin: auto;
     position: relative;
     object-fit: cover;
+    z-index:2;
     /* vertical-align: middle; */
+}
+.waves { 
+    height: 100vh;
+    background-color: black
 }
