@@ -162,18 +162,11 @@ video {
     height: auto;
     object-fit: cover;
 }
-canvas{
-    display: block;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: auto;
-    position: relative;
-    object-fit: cover;
-    z-index:2;
-    /* vertical-align: middle; */
-}
-.waves { 
-    height: 100vh;
-    background-color: black
+
+#canvas {
+    /* background-color: #FFF; */
+    width: 720px;
+    height: 360px;
+    /* border: 1px solid black; */
+    z-index:1;
 }

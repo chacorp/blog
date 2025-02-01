@@ -4,18 +4,31 @@
 
 // import * as THREE from 'https://cdn.jsdelivr.net/npm/three/build/three.module.js';
 function rendering() {
-    const canvas = document.createElement('canvas');
+    // const container = document.getElementById( 'waves' );
+    // document.body.appendChild( container );
+    const container = document.getElementById('canvas');
+
+    // const canvas = document.createElement('canvas');
     // const canvas = document.createElement('div');
-    canvas.id='home-canvas'
-    document.body.appendChild(canvas);
-    
-    // const renderer = new THREE.WebGLRenderer({ alpha:true });
-    const renderer = new THREE.WebGLRenderer({ canvas });
-    renderer.setSize(canvas.width, canvas.height);
+    // canvas.id='home-canvas'
+    // canvas.className='one-column'
+    // document.body.appendChild(canvas);
+    // container.appendChild(canvas);
+    render_width=container.offsetWidth;
+    render_height=container.offsetHeight;
+
+    const renderer = new THREE.WebGLRenderer({ alpha:true });
+    // const renderer = new THREE.WebGLRenderer({ canvas });
+    // const renderer = new THREE.CanvasRenderer();
+    renderer.setSize(render_width, render_height);
     renderer.setClearColor( 0x000000, 0 );
     
+    // document.body.appendChild(canvas);
+    container.appendChild(renderer.domElement);
+
+
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1,1000);
+    const camera = new THREE.PerspectiveCamera(45, render_width / render_height, 0.1,1000);
     camera.position.z =5;
     
     const geometry = new THREE.BoxGeometry();
@@ -56,6 +69,5 @@ function rendering() {
 
     renderer.render(scene,camera); 
     }
-    // canvas.appendChild( renderer.domElement );
     animate(); 
 }
