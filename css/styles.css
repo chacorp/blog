@@ -102,7 +102,7 @@ body {
 
 .content {
     display: none;
-    padding: 120px 20px 20px; 
+    padding: 100px 20px 20px; 
 }
 .content.active {
     display: block;
@@ -116,7 +116,7 @@ body {
 
 .one-column {
     display: block;
-    /* align-items: left; */
+    text-align: center;
     /* flex-direction: row; */
 }
 .two-column {
