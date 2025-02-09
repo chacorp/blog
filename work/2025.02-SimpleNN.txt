@@ -1,4 +1,13 @@
 Visualizing neural network training with Unity
+
+김성현 (@okdalto)의 Conv net 시각화에 영감을 받아, 2025년 2월 1일 부터 주말마다 작업하기 시작한 프로젝트. 최종적인 목표는 뉴럴네트워크 학습 과정에서 weight 와 bias 값이 업데이트 되는 것을 시각화 하는 것이다. 중간 목표로는 pytorch 와 최대한 동일한 방식으로 작동하도록 패키징해서 사용을 편리하게 하는 것이다. 
+따라서 pytorch에서 제공하는 auto grad 방식이 가능해야 한다! 사실 구현에서 쉬운 것은 전체 모델에 대해 forward와 backward 를 만들어두는 것이지만, 이는 모델마다 매번 만들어야 하는 단점이 있다. 따라서 각 weight 마다 자신의 gradient를 추적하도록 하는 방식으로 구현을 진행하고자 한다. 사실 weight 하나하나 마다 추적하게 하면, 오히려 계산이 다음과 같이 $$wx+b$$ 꼴로 단순해져서 gradient를 계산이 쉬워진다.
+
+약간 걱정인 것은 이전 레이어로 gradient를 넘겨주는 부분하고 normalization과 activation에 대한 graident 추정인데, 전자의 경우는 생각을 좀 해봐야겠지만 후자의 경우 다행히도 Arxiv에 관련 논문들이 공개되어있으니, 차분히 읽으며 구현하면 어떻게든 만들 수 있지 않을까 싶다.
+
+Unity는 요새 주식에서 죽을 쑤고 있는데, 사실 unreal engine 보다는 훨씬 익숙해서 이걸로 선택했다. 이번에 들어가보니 버전 6가 나와서 해당버전으로 작업을 시작했다. Unity 에서 가장 핵심이 되는 것은 Monobehaviour 와 lifecycle인데, 일단 구현에 있어서 이것들은 일단 신경쓰지 않겠다. 물론 각 레이어별로 넘어가는 애니메이션을 위해선 고려하지 않을 수 없는 굉장히 중요한 부분이지만, 뉴럴네트워크 구조 설계와 gradient 추정만 해도 머리 터질것 같아서 일단은 차치하기로 한다.
+  
+
 <div class="hline"></div>
 <div class="csharp">
     <pre>
