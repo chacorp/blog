@@ -131,6 +131,10 @@ body {
     text-decoration: none;
 }
 
+.is-ratio-80{
+    max-width: 80%;
+}
+
 .is-free{
     width: 100%;
 }
@@ -145,6 +149,9 @@ body {
 }
 .is-400{
     max-width: 400px;
+}
+.is-500{
+    max-width: 500px;
 }
 .is-600{
     max-width: 600px;
@@ -186,7 +193,7 @@ body {
     align-items: center;  
 }
 .content.active.sidebar-visible {
-    padding-right: 200px;
+    padding-top: 120px;
 }
 .content p {
     white-space: pre-wrap;
@@ -276,20 +283,21 @@ video {
     /* background-color: #FFF; */
     /* width: 720px; */
     width:  80vh;
-    height: 360px;
+    height: auto;
     /* border: 1px solid black; */
     z-index:1;
 }
 
 pre {
     margin: 0;
-    /* color: #f0f0f0; */
+    color: #e0e0e0;
 }
  
 code {
     display: block;
     font-family: Consolas, Monaco, monospace;
     font-size: 10pt;
+    background-color: #202020;
     overflow-x: auto;
     padding: 0.5em;
     scrollbar-width: thin;
