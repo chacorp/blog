@@ -122,17 +122,19 @@
                 }
             }
 
-            function showContent(id, keepContent = false) {
+            function showContent(id, resetContent = false) {
                 const sections = document.querySelectorAll('.content');
                 // sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
                 // sections.forEach(section => section.classList.remove('active'));
-                if (!keepContent){
-                    sections.forEach(section => {
-                        if (!section.id.includes(id)) {
-                            section.classList.remove('active');
-                        }
-                    });
-                }
+                const given_id = id.split('-')[0]
+                sections.forEach(section => {
+                    if (!section.id.includes(given_id)) {
+                        section.classList.remove('active');
+                    }
+                    if (section.id.includes('box')) {
+                        section.classList.remove('active');
+                    }
+                });
 
                 const targetSection = document.getElementById(id);
                 if (targetSection) {
@@ -147,7 +149,7 @@
                     keyword=id.split('-')[0];
                     sidebar.classList.add('active');
                     // targetSection.classList.add('sidebar-visible');
-                    loadJSONToBoxes(`data/${keyword}.json`, targetSection.id);
+                    loadJSONToBoxes(`data/${keyword}.json`, given_id);
                 } 
                 else {
                     sidebar.classList.remove('active');
@@ -201,7 +203,7 @@
                     </ul>
                 </div>
                 <div class="hline"></div>
-                <div class="hline sidebar"></div>
+                <div class="sidebar"></div>
             </div>
         </div>
         
@@ -378,7 +380,7 @@
             <div class="hline"></div>
             
             <div class="one-column">
-                <p class="text_center ">This is the memo section.</p>
+                <p class="text_center ">all about memos.</p>
                 <p class="text_center noto-serif-kr">I post 뻘글 here.</p>
             </div>
             <div class="hline"></div>
@@ -392,10 +394,8 @@
             </div>
             <div class="hline"></div>
 
-            <p class="text_center noto-serif-kr">관련있는 포스터들 모음집</p>
-            <p class="text_center">
-                relavent poster collection.
-            </p>
+            <p class="text_center noto-serif-kr">관련있는 포스터들 모음집.</p>
+            <p class="text_center">relavent poster collection.</p>
             <div class="hline"></div>
         </div>
 
@@ -406,9 +406,11 @@
                 <h1>Work</h1>
             </div>
             <div class="hline"></div>
-
+            
             <p class="text_center noto-serif-kr">작업들. 슬라이드바의 버튼을 눌러보세요.</p>
             <p class="text_center">My works. Click buttons on the slide bar.</p>
+            <!-- <div id="work-post" class="content active">
+            </div> -->
             <div class="hline"></div>
         </div>
 

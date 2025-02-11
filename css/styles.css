@@ -87,8 +87,9 @@ body {
     display: flex;
     justify-content: space-around;
     list-style: none;
+    padding: 2px 0px 2px 0px;
     margin: 0 auto;
-    padding: 0;
+    /* padding: 0; */
 }
 .navbar a {
     /* display: inline-flex; */
@@ -170,7 +171,8 @@ body {
 .postbox{
     /* max-width: 800px;  */
     font-size: 12px;
-    font-family: 'Cambria', Georgia, serif;
+    /* font-family: 'Cambria', Georgia, serif; */
+    font-family: "Noto Serif KR", serif;
     justify-content: center;
     align-items: center;
 }
@@ -179,7 +181,7 @@ body {
     /* Ensure the maximum width does not exceed 1024px */
     /* max-width: 800px; */
     /* Set the desired width */
-    /* width: 90%;  */
+    width: 90%; 
     height: auto; /* Maintain the aspect ratio */
     vertical-align: middle;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
