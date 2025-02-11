@@ -103,6 +103,7 @@ body {
     background-color: #dbd5cd;
     /* padding: 5px 100px 5px 10px; */
     /* padding-right: 100px; */
+    padding: 5px 0px 5px 0px;
     box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
     display: none;
     flex-direction: row;
@@ -112,7 +113,7 @@ body {
     display: flex;
 }
 .sidebar button {
-    font-size: 12px;
+    font-size: 14px;
     /* margin: 0px 0px 0px 15px; */
     padding: 5px 20px 5px 20px;
     border: none;
@@ -120,6 +121,7 @@ body {
     color: black;
     cursor: pointer;
     text-align: left;
+    font-family: "Noto Serif KR", serif;
     white-space: nowrap;
 }
 .sidebar button:hover {
@@ -167,15 +169,18 @@ body {
 }
 
 .postbox{
-    max-width: 600px; 
+    /* max-width: 800px;  */
     font-size: 12px;
-    /* font-family: 'Noto Sans KR', sans-serif;  */
     font-family: 'Cambria', Georgia, serif;
+    justify-content: center;
+    align-items: center;
 }
 
 .postbox-image {
-    max-width: 800px; /* Ensure the maximum width does not exceed 1024px */
-    width: 90%; /* Set the desired width */
+    /* Ensure the maximum width does not exceed 1024px */
+    /* max-width: 800px; */
+    /* Set the desired width */
+    /* width: 90%;  */
     height: auto; /* Maintain the aspect ratio */
     vertical-align: middle;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
@@ -190,7 +195,7 @@ body {
     display: block;
     /* display: flex; */
     justify-content: center;
-    align-items: center;  
+    align-items: center;
 }
 .content.active.sidebar-visible {
     padding-top: 80px;
@@ -220,8 +225,10 @@ body {
     /* font-family: "DM Serif Text", serif; */
     font-weight: 400;
     font-style: normal;
-    font-size: 26px;
-    font-size: 3.2vw;
+    /* font-size: 26px; */
+    /* font-size: min(2.6vw, 30px); */
+    font-size: clamp(6px, 3vw, 32px);;
+    /* text-size-adjust: auto; */
     
 }
 
