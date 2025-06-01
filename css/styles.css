@@ -6,16 +6,11 @@ body {
     background-color: #dbd5cd;
 }
 
-.date {
-    position: fixed;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-}
-
 .logo {
-    position: fixed;
-    color: white;
+    /* margin: 0 auto; */
+    position: relative;
+    color: black;
+    /* color: white; */
     text-decoration: none;
     font-size: 16px;
 }
@@ -25,6 +20,9 @@ body {
     width: 100%;
     height: auto;
     vertical-align: middle;
+}
+.margin_center{
+    margin: 0 auto;
 }
 .hline{
     width: 100%;
@@ -40,8 +38,8 @@ body {
     border-bottom: 6px double #333333;
 }
 .vline{
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     border-left: 1.5px solid #333333;
 }
 .boderline-double{
@@ -62,52 +60,51 @@ body {
     width: 100%;
 }
 
+
+/* .content {
+    position: relative;
+    display: none;
+    padding: 50px 20px 20px;
+}
+.content.active {
+    display: block;
+    justify-content: center;
+    align-items: center;  
+} */
 .navbar {
-    position: fixed; /*should be stick to the top!*/
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-width: 600px;
+    position: relative;
+    display: block;
     font-family: "Times New Roman", Times, serif;
     font-size: 16px;
-    background-color: #333;
-    color: white;
-    padding: 25px 20px 25px 20px;
-    display: flex;
-    justify-content: space-between;
+    background-color: #dbd5cd;
+    color: black;
+    padding: 25px 20px 0px 20px;
     align-items: center;
-    z-index: 1000;
-    border-bottom: 5px double #dbd5cd;
+    margin: 0 auto;
+    /* justify-content: space-between; */
 }
 .navbar ul {
-    position: absolute;
-    list-style: none;
-    right: 0;
-    margin: 10px;
-    padding: 0 60px; /* Add padding to prevent text from being cut off */
     display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 2px 0px 2px 0px;
+    margin: 0 auto;
+    /* padding: 0; */
 }
-.navbar ul li {
-    margin: 0 5px;
-}
-.navbar ul li a {
-    color: white;
+.navbar a {
+    /* display: inline-flex; */
+    color: black;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .sidebar {
-    position: absolute;
+    position: relative;
     font-family: "Times New Roman", Times, serif;
-    top: 50px;
-    left: 0;
-    right: 0;
-    width: calc(100%+50px);
-    /* background-color: #eeeeee; */
     background-color: #dbd5cd;
-    padding: 5px 100px 5px 10px;
-    margin-right: 50px;
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+    /* padding: 5px 100px 5px 10px; */
+    /* padding-right: 100px; */
+    padding: 5px 0px 5px 0px;
     display: none;
     flex-direction: row;
     overflow-x: scroll;
@@ -116,7 +113,7 @@ body {
     display: flex;
 }
 .sidebar button {
-    font-size: 12px;
+    font-size: 14px;
     /* margin: 0px 0px 0px 15px; */
     padding: 5px 20px 5px 20px;
     border: none;
@@ -124,6 +121,7 @@ body {
     color: black;
     cursor: pointer;
     text-align: left;
+    font-family: "Noto Serif KR", serif;
     white-space: nowrap;
 }
 .sidebar button:hover {
@@ -171,15 +169,19 @@ body {
 }
 
 .postbox{
-    max-width: 600px; 
+    /* max-width: 800px;  */
     font-size: 12px;
-    /* font-family: 'Noto Sans KR', sans-serif;  */
-    font-family: 'Cambria', Georgia, serif;
+    /* font-family: 'Cambria', Georgia, serif; */
+    font-family: "Noto Serif KR", serif;
+    justify-content: center;
+    align-items: center;
 }
 
 .postbox-image {
-    max-width: 800px; /* Ensure the maximum width does not exceed 1024px */
-    width: 90%; /* Set the desired width */
+    /* Ensure the maximum width does not exceed 1024px */
+    /* max-width: 800px; */
+    /* Set the desired width */
+    width: 90%; 
     height: auto; /* Maintain the aspect ratio */
     vertical-align: middle;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
@@ -188,13 +190,16 @@ body {
 .content {
     position: relative;
     display: none;
-    padding: 70px 20px 20px;
+    padding: 0px 20px 20px;
 }
 .content.active {
     display: block;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
 }
 .content.active.sidebar-visible {
-    padding-top: 120px;
+    padding-top: 80px;
 }
 .content p {
     white-space: pre-wrap;
@@ -221,12 +226,21 @@ body {
     /* font-family: "DM Serif Text", serif; */
     font-weight: 400;
     font-style: normal;
-    font-size: 26px;
-    font-size: 3.2vw;
+    /* font-size: 26px; */
+    /* font-size: min(2.6vw, 30px); */
+    font-size: clamp(6px, 3vw, 32px);;
+    /* text-size-adjust: auto; */
     
 }
 
+.h_center{
+    justify-content: center;  /* horizontal */
+}
+.v_center{
+    align-items: center;  /* horizontal */
+}
 .base-container {
+    margin: 0 auto;
     display: flex;
     justify-content: center;  /* horizontal */
     align-items: center;  /* vertical */

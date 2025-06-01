@@ -45,6 +45,7 @@
             }
             
             async function loadJSONToBoxes(filePath, parent_id='') {
+                const targetSection = document.getElementById(parent_id);
                 try {
                     const response = await fetch(filePath);
                     if (!response.ok) {
@@ -55,12 +56,12 @@
                     
                     const sidebar = document.querySelector('.sidebar');
                     sidebar.innerHTML = ''; // Clear previous buttons to avoid duplication
-
+                    
                     for (const [index, item] of data.entries()) {
                         // Create a new content box
                         const box = document.createElement('div');
                         box.id = `${parent_id}-post-box${index + 1}`;
-                        box.className = 'content postbox';
+                        box.className = 'content postbox margin_center';
 
                         // Load content from text file if specified
                         let textContent = '';
@@ -94,7 +95,8 @@
                             <h2>${item.title}</h2>
                             ${textContent}
                         `;
-                        document.body.appendChild(box);
+                        // document.body.appendChild(box);
+                        targetSection.appendChild(box);
 
                         // Add a button for the new box in the sidebar
                         const button = document.createElement('button');
@@ -109,7 +111,7 @@
 
                         // Add event listener for the button
                         button.addEventListener('click', function() {
-                            showContent(box.id);
+                            showContent(box.id, true);
                         });
                     }
 
@@ -120,9 +122,19 @@
                 }
             }
 
-            function showContent(id, keepSidebar = false) {
+            function showContent(id, resetContent = false) {
                 const sections = document.querySelectorAll('.content');
-                sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
+                // sections.forEach(section => section.classList.remove('active', 'sidebar-visible'));
+                // sections.forEach(section => section.classList.remove('active'));
+                const given_id = id.split('-')[0]
+                sections.forEach(section => {
+                    if (!section.id.includes(given_id)) {
+                        section.classList.remove('active');
+                    }
+                    if (section.id.includes('box')) {
+                        section.classList.remove('active');
+                    }
+                });
 
                 const targetSection = document.getElementById(id);
                 if (targetSection) {
@@ -136,8 +148,8 @@
                 if ((id.includes('memo')) || (id.includes('work')) || (id.includes('poster'))) {
                     keyword=id.split('-')[0];
                     sidebar.classList.add('active');
-                    targetSection.classList.add('sidebar-visible');
-                    loadJSONToBoxes(`data/${keyword}.json`, id);
+                    // targetSection.classList.add('sidebar-visible');
+                    loadJSONToBoxes(`data/${keyword}.json`, given_id);
                 } 
                 else {
                     sidebar.classList.remove('active');
@@ -153,14 +165,14 @@
                 });
             });
 
-            const pLinks = document.querySelectorAll('.plane-a');
-            pLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    showContent(targetId);
-                });
-            });
+            // const pLinks = document.querySelectorAll('.plane-a');
+            // pLinks.forEach(link => {
+            //     link.addEventListener('click', function(event) {
+            //         event.preventDefault();
+            //         const targetId = this.getAttribute('href').substring(1);
+            //         showContent(targetId);
+            //     });
+            // });
 
             document.querySelector('.logo').addEventListener('click', () => {
                 showContent('home');
@@ -170,252 +182,251 @@
 </head>
 
 <body>
-    <div class="navbar">
-        
-        <a id="main" class="logo" href="#"></a>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#poster">Poster</a></li>
-            <li><a href="#memo">Memo</a></li>
-            <li><a href="#cv">CV</a></li>
-        </ul>
-    
-        <!-- <div class="sidebar-container active">
-        </div> -->
-        <div class="sidebar hline double"></div>
-    </div>
-    
-
-    <div id="home" class="content active">
-    
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>The New Daily Post Times</h1>
-            <!-- <p>The New Daily Post Times</p> -->
-        </div>
-        <div class="hline"></div>
-        
-        <!-- </br> -->
-        <div class="text-container text_center">
-            <p>WIP | Contents will be added soon | <a href="https://sihuncha.tumblr.com/" class="plane-a">How you doin?</a> | Quite well | Thank you very much  </p>
-        </div>
-        <div class="hline double no_margin"></div>
-
-        <div class="base-container">
-            <div class="two-column">
-                <div class="image-container is-300 text_center">
-                    <img src="image/test.png" class="boderline-none">
-                    <p>Fig.1 Image of a flash light.</p>
-                    <!-- <img src="image/test.png" class="boderline-single"> -->
+    <div class="is-800 margin_center">
+        <div class="navbar">
+            <div class="is-800 margin_center">
+                <div class="hline"></div>
+                <div class="head boderline-double text_center">
+                    <h1>The New Daily Post Times</h1>
                 </div>
-                <div class="vline"></div>
-                <div class="text-container is-400">
-                    <h1>Welcome to my blog!</h1>
-                    <h2>Hello there!</h2>
-                    <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-                    <p>Still working in progress</p>
-                    <abbr title="But nothing happened!">Hold ur mouse here!</abbr>
+                <div class="hline"></div>
+                
+                <div class="one-column">
+                    <ul>
+                        <a id="main" class="logo" href="#"></a>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#work">Work</a>
+                        <a href="#poster">Poster</a>
+                        <a href="#memo">Memo</a>
+                        <a href="#cv">CV</a>
+                    </ul>
                 </div>
+                <div class="hline"></div>
+                <div class="sidebar"></div>
             </div>
         </div>
-        <div class="hline"></div>
+        
 
-        <div class="base-container">
-            <div class="two-column">
-                <div class="text-container is-200 noto-serif-kr">
-                    <p>뉴스 | 하나 [2025]</p>
-                    <p>이번 Eurographics 2025에서 논문이 2개 발표될 예정!</p>
-                </div>
-                <div class="vline"></div>
-                <div class="text-container is-200 noto-serif-kr">
-                    <p>뉴스 | 둘 [2024]</p>
-                    <p>미국 산타모니카 소재 Flawless AI에서 연구 인턴을 진행! (3개월)</p>
-                </div>
-                <div class="vline"></div>
-                <div class="text-container is-200 noto-serif-kr">
-                    <p>뉴스 | 셋 [2024]</p>
-                    <p>임다울 개인전 《임다울》에서 기술 협력으로 참여!</p>
-                </div>
-                <div class="vline"></div>
-                <div class="text-container is-200 noto-serif-kr">
-                    <p>뉴스 | 야! [2024]</p>
-                    <p>CVPR workshop에서 Poster 발표!</p>
-                </div>
-            </div>
-        </div>
-        <div class="hline"></div>
-        <div class="base-container">
-            <div class="two-column">
-                <div class="text-container is-600 noto-serif-kr">
-                    <h2>Quote</h2>
-                    <hr>
-                    *1965년 생각들
-                    <blockquote> (전략) ⋯</blockquote>
-                    <blockquote>우리는 적어도 기술을 증오할 만큼 고도의 기술을 원한다 ⋯</blockquote>
-                    <blockquote>우리는 적어도 번영을 경시할 만큼 충분한 번영을 원한다.</blockquote>
-                    <blockquote>우리는 적어도 평화에 진력이 날 만큼 충분한 평화를 원한다.</blockquote>
-                    <blockquote> (후략) ⋯</blockquote>
-                    <hr>
-                    <a class="noto-serif-kr"> - 백남준: 말에서 크리스토까지 에서 발췌,</a>
-                    <div class="text-container noto-serif-kr">
-                        <p>각주) *1965년 생각들: 1965년 6월 5일 부퍼탈 파르나스 갤러리에서 열린 해프닝, &lt; 24시간을 위한 원고 &gt; 독일 이체호에서 작성.</p>
+        <div id="home" class="content active">
+            <div class="is-800 margin_center">
+                <!-- <div class="text-container text_center">
+                    <p>WIP | Contents will be added soon | BTW | this is not | a menu button  </p>
+                </div> -->
+                <!-- <div class="hline double no_margin"></div> -->
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="image-container is-300 text_center">
+                            <img src="image/test.png" class="boderline-none">
+                            <p>Fig.1 Image of a flash light.</p>
+                            <!-- <img src="image/test.png" class="boderline-single"> -->
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container is-400">
+                            <h1>Welcome to my blog!</h1>
+                            <h2>Hello there!</h2>
+                            <p>Still working in progress.</p>
+                            <p class="noto-serif-kr">본 블로그는 아직 개발 중에 있습니다. 매번 뒤엎느라 언제 완성될 지 가늠할 수 없음.</p>
+                            <p class="noto-serif-kr">그리고 아쉽게도 뭘 눌러도 어디로 가진 않습니다.</p>
+                            <p class="noto-serif-kr">근데 또 어떤 건 작동할지도?</p>
+                            <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+                            <abbr title="But nothing happened!">Hold ur mouse here!</abbr>
+                        </div>
                     </div>
                 </div>
-                <div class="vline"></div>
-                <div class="text-container is-200 noto-serif-kr">
-                    <p>그냥</p>
+                <div class="hline"></div>
+                <div class="base-container">
+                    <p class="noto-serif-kr">Whats new?</p>
                 </div>
-            </div>
-        </div>
-        <div class="hline"></div>
+                <div class="hline"></div>
 
-        <div class="base-container">
-            <div class="two-column">
-                <div class="text-container is-200">
-                    <h3>Rendering threejs</h3>
-                    <h4><i>just for fun</i></h4>
-                    <p>cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube cube</p>
-                </div>
-                <div class="vline"></div>
-                <div id="canvas" class="image-container is-300">
-                    <script>rendering()</script>
-                </div>
-            </div>
-        </div>
-        <div class="hline"></div>
-    </div>
-
-    <div id="about" class="content">
-        
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>About</h1>
-            <!-- <p>The New Daily Post Times</p> -->
-        </div>
-        <div class="hline"></div>
-
-        <div class="base-container">
-            <div class="two-column">
-                <div class="text-container">
-                    <p>My name is Sihun Cha</p>
-                    <p class="noto-serif-kr">제 이름은 차시헌 입니다</p>
-                </div>
-                <div class="vline"></div>
-                <div class="text-container noto-serif-kr">
-                    <p>한예종 조형예술과 예술사를 졸업하고 작업 활동을 잠깐 하다가 현재는 카이스트 문화기술대학원에서 현재 박사과정을 하고 있습니다.</p>
-                    <p>Read Korean hahaha</p>
-                    <p>대충 자세한 내용은 CV 를 참조하시면 감사하겠습니다.</p>
-                    <p>Please refer to CV for more details.</p>
-                </div>
-            </div>
-        </div>
-        <div class="hline"></div>
-            <div class="base-container">
-
-                <div class="two-column">
-                    <div class="image-container text_center is-300">
-                        <img src="image/batman-thinking.gif" class="boderline-none">
-                        <p>Gif.2 hmm...</p>
-                    </div>
-                    <div class="vline"></div>
-                    <div class="text-container is-500">
-                        <p class="noto-serif-kr">이 블로그는 제가 끄적인 것들에 관한 것 입니다.</p>
-                        <p class="noto-serif-kr">즉, 아무 것이기도 아무 것이 아니기도 한겨!</p>
-                        </br>
-                        <p>This blog is about my personal scribbles.</p>
-                        <p>That is, nothing and everything!</p>
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="text-container is-200 noto-serif-kr">
+                            <p>뉴스 | 하나 [2025]</p>
+                            딱히 별일없음!
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container is-200 noto-serif-kr">
+                            <p>뉴스 | 둘 [2024]</p>
+                            이번 Eurographics 2025에서 <a href="https://eg25.cs.ucl.ac.uk/main/talks.html?type=Full%20Paper">참여 논문이 3개</a> 발표될 예정!
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container is-200 noto-serif-kr">
+                            <p>뉴스 | 셋 [2024]</p>
+                            <p>미국 산타모니카 소재 Flawless AI에서 연구 인턴을 진행! (3개월)</p>
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container is-200 noto-serif-kr">
+                            <p>뉴스 | 야! [2024]</p>
+                            <p>임다울 개인전 《임다울》에서 기술 협력으로 참여!</p>
+                            <!-- <p>CVPR workshop에서 Poster 발표!</p> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-        <div class="hline"></div>
-        
-        <div class="base-container">
-            <div class="one-column">
-                <h1>Who am I?</h1>
-                <p>I wonder who I am...</p>
-            </div>
-        </div>
-        <div class="hline"></div>
-        <div class="base-container">
-            <div class="two-column">
-                <div class="text-container is-500">
-                    <p>Testing two column with image</p>
+                <div class="hline"></div>
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="text-container is-400 noto-serif-kr">
+                            <h2>Quote</h2>
+                            <hr>
+                            *1965년 생각들
+                            <blockquote> (전략) ⋯</blockquote>
+                            <blockquote>우리는 적어도 기술을 증오할 만큼 고도의 기술을 원한다 ⋯</blockquote>
+                            <blockquote>우리는 적어도 번영을 경시할 만큼 충분한 번영을 원한다.</blockquote>
+                            <blockquote>우리는 적어도 평화에 진력이 날 만큼 충분한 평화를 원한다.</blockquote>
+                            <blockquote> (후략) ⋯</blockquote>
+                            <hr>
+                            <a class="noto-serif-kr"> - 백남준: 말에서 크리스토까지 에서 발췌,</a>
+                            <div class="text-container noto-serif-kr">
+                                <p>각주) *1965년 생각들: 1965년 6월 5일 부퍼탈 파르나스 갤러리에서 열린 해프닝, &lt; 24시간을 위한 원고 &gt; 독일 이체호에서 작성.</p>
+                            </div>
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container is-400 noto-serif-kr">
+                            <p>그냥</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="vline"></div>
-                <div class="image-container text_center  is-300">
-                    <img src="image/batman-thinking.gif" class="boderline-none">
-                    <p>Gif.3 hmm...</p>
+                <div class="hline"></div>
+
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="text-container is-500">
+                            <h3>Rendering threejs</h3>
+                            <h4><i>just for fun</i></h4>
+                            <p class="noto-serif-kr">여백의 미</p>
+                        </div>
+                        <div class="vline"></div>
+                        <div id="canvas" class="image-container is-300">
+                            <script>rendering()</script>
+                        </div>
+                    </div>
                 </div>
+                <div class="hline double"></div>
+                
             </div>
         </div>
-        <div class="hline"></div>
-    </div>
 
-    <div id="memo" class="content is-800">
+        <div id="about" class="content">
+            <div class="is-800 margin_center">
+
+                <div class="head">
+                    <h3>About</h3>
+                </div>
+                <div class="hline"></div>
         
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>Memo</h1>
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="text-container">
+                            <p>My name is Sihun Cha</p>
+                            <p class="noto-serif-kr">제 이름은 차시헌 입니다</p>
+                        </div>
+                        <div class="vline"></div>
+                        <div class="text-container noto-serif-kr">
+                            <p>한예종 조형예술과 예술사를 졸업하고 작업 활동을 잠깐 하다가 현재는 카이스트 문화기술대학원에서 박사과정을 하고 있습니다.</p>
+                            <p>Read Korean hahaha</p>
+                            <p>대충 자세한 내용은 CV 를 참조하시면 감사하겠습니다.</p>
+                            <p>Please refer to CV for more details.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hline"></div>
+                    <div class="base-container">
+        
+                        <div class="two-column">
+                            <div class="image-container text_center is-300">
+                                <img src="image/batman-thinking.gif" class="boderline-none">
+                                <p>Gif.2 hmm...</p>
+                            </div>
+                            <div class="vline"></div>
+                            <div class="text-container is-500">
+                                <p class="noto-serif-kr">이 블로그는 제가 끄적인 것들에 관한 것 입니다.</p>
+                                <p class="noto-serif-kr">즉, 아무 것이기도 아무 것이 아니기도 한겨!</p>
+                                </br>
+                                <p>This blog is about my personal scribbles.</p>
+                                <p>That is, nothing and everything!</p>
+                            </div>
+                        </div>
+                    </div>
+                <div class="hline"></div>
+                
+                <div class="base-container">
+                    <div class="one-column">
+                        <h1>Who am I?</h1>
+                        <p>I wonder who I am...</p>
+                    </div>
+                </div>
+                <div class="hline"></div>
+                <div class="base-container">
+                    <div class="two-column">
+                        <div class="text-container is-500">
+                            <p>Testing two column with image</p>
+                        </div>
+                        <div class="vline"></div>
+                        <div class="image-container text_center  is-300">
+                            <img src="image/batman-thinking.gif" class="boderline-none">
+                            <p>Gif.3 hmm...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hline"></div>
+            </div>
         </div>
-        <div class="hline"></div>
-        
-        <p class="text_center">
-            This is the memo section.
-        </p>
-        <p class="text_center noto-serif-kr">
-            I post 뻘글 here.
-        </p>
-        <div class="hline"></div>
-    </div>
-    
-    <div id="poster" class="content is-800">
-        
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>Poster</h1>
+
+        <div id="memo" class="content is-800 margin_center">
+            
+            <div class="hline"></div>
+            <div class="head boderline-double">
+                <h3>Memo</h3>
+            </div>
+            <div class="hline"></div>
+            
+            <!-- <div class="one-column">
+                <p class="text_center ">all about memos.</p>
+                <p class="text_center noto-serif-kr">I post 뻘글 here.</p>
+            </div> -->
+            <!-- <div class="hline"></div> -->
         </div>
-        <div class="hline"></div>
-
-        <p class="text_center noto-serif-kr">
-            관련있는 포스터들 모음집
-        </p>
-        <p class="text_center">
-            relavent poster collection.
-        </p>
-        <div class="hline"></div>
-    </div>
-
-    <div id="work" class="content">
         
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>Work</h1>
+        <div id="poster" class="content is-800 margin_center">
+            
+            <div class="hline"></div>
+            <div class="head boderline-double">
+                <h3>Poster</h3>
+            </div>
+            <div class="hline"></div>
+<!-- 
+            <p class="text_center noto-serif-kr">관련있는 포스터들 모음집.</p>
+            <p class="text_center">relavent poster collection.</p>
+            <div class="hline"></div> -->
         </div>
-        <div class="hline"></div>
 
-        <p class="text_center noto-serif-kr">
-            작업들. 슬라이드바의 버튼을 눌러보세요.
-        </p>
-        <p class="text_center">
-            My works. Click buttons on the slide bar
-        </p>
-        <div class="hline"></div>
-    </div>
-
-    <div id="cv" class="content">
-        
-        <div class="hline"></div>
-        <div class="head boderline-double">
-            <h1>My CV</h1>
+        <div id="work" class="content is-800 margin_center">
+            
+            <div class="hline"></div>
+            <div class="head boderline-double">
+                <h3>WORK</h3>
+            </div>
+            <div class="hline"></div>
+            
+            <!-- <p class="text_center noto-serif-kr">작업들. 슬라이드바의 버튼을 눌러보세요.</p>
+            <p class="text_center">My works. Click buttons on the slide bar.</p> -->
+            <!-- <div id="work-post" class="content active"></div> -->
+            <!-- <div class="hline"></div> -->
         </div>
-        <div class="hline"></div>
-        <p class="text_center">Curriculum Vitae   a.k.a   Resume   a.k.a   Career Summary</p>
-        <div class="hline double"></div>
-        <iframe src="https://chacorp.github.io/sihuncha/cv.html" title="CV Page"></iframe>
-    </div>
 
+        <div id="cv" class="content is-800 margin_center">
+            
+            <div class="head">
+                <h3>My CV</h3>
+            </div>
+            <div class="hline"></div>
+            <p class="text_center">Curriculum Vitae   a.k.a   Resume   a.k.a   Career Summary</p>
+            <div class="hline double"></div>
+            <iframe src="https://chacorp.github.io/sihuncha/cv.html" title="CV Page"></iframe>
+        </div>
+    </div>
 </body>
 
 </html>
